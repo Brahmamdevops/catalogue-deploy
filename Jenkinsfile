@@ -15,7 +15,7 @@ pipeline {
         // disableConcurrentBuilds()
     }
         parameters {
-        string(name: 'version', defaultValue: '1.0.0', description: 'Who should I say hello to?')
+        string(name: 'version', defaultValue: '', description: 'Who should I say hello to?')
         string(name: 'environment', defaultValue: '', description: 'Who should I say hello to?')
        
     }
