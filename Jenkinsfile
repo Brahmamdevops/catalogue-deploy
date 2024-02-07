@@ -26,22 +26,6 @@ pipeline {
                 echo "${params.environment}"
             
         }
-        stage('Test') {
-            steps {
-                echo 'Testing..'
-            }
-        }
-        stage('Deploy') {
-            steps {
-                echo 'Deploying..'
-                echo "$GREETING"
-                // echo "$env"
-                 sh """
-                    echo  "Here I wrote shell script"
-                    echo "$GREETING"
-                    #sleep 10
-                """
-            }
         }
         stage('check params'){
             steps{
