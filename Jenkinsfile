@@ -5,14 +5,14 @@ pipeline {
         }
     }
     
-     environment { 
-        GREETING = 'Hello Jenkins'
-    }
+    //  environment { 
+    //     GREETING = 'Hello Jenkins'
+    // }
 
     options {
         ansiColor('xterm')
-        // timeout(time: 1, unit: 'HOURS')
-        // disableConcurrentBuilds()
+        timeout(time: 1, unit: 'HOURS')
+        disableConcurrentBuilds()
     }
         parameters {
         string(name: 'version', defaultValue: '', description: 'Who should I say hello to?')
@@ -45,20 +45,15 @@ pipeline {
              """
         }
         }
-        stage('check params'){
-            steps{
+
+        stage('apply') {
+            steps {
                 sh """
-                    echo "Hello ${params.PERSON}"
-
-                    echo "Biography: ${params.BIOGRAPHY}"
-
-                    echo "Toggle: ${params.TOGGLE}"
-
-                    echo "Choice: ${params.CHOICE}"
-
-                    echo "Password: ${params.PASSWORD}"
-                """
-            }
+                    cd terraform 
+                    terraform apply-var-file=${params.environment}/${params.environment}.tfvars -var="app_version=${params.version}" -auto-approve
+                    
+             """
+        }
         }
     }
     // post build
